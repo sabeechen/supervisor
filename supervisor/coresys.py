@@ -39,6 +39,7 @@ if TYPE_CHECKING:
     from .supervisor import Supervisor
     from .updater import Updater
     from .security import Security
+    from .bus import Bus
 
 
 T = TypeVar("T")
@@ -87,6 +88,7 @@ class CoreSys:
         self._resolution: Optional[ResolutionManager] = None
         self._jobs: Optional[JobManager] = None
         self._security: Optional[Security] = None
+        self._bus: Optional[Bus] = None
 
     @property
     def dev(self) -> bool:
@@ -347,6 +349,20 @@ class CoreSys:
         self._dbus = value
 
     @property
+    def bus(self) -> Bus:
+        """Return Bus object."""
+        if self._bus is None:
+            raise RuntimeError("Bus not set!")
+        return self._bus
+
+    @bus.setter
+    def bus(self, value: Bus) -> None:
+        """Set a Bus object."""
+        if self._bus:
+            raise RuntimeError("Bus already set!")
+        self._bus = value
+
+    @property
     def host(self) -> HostManager:
         """Return HostManager object."""
         if self._host is None:
@@ -534,8 +550,13 @@ class CoreSysAttributes:
 
     @property
     def sys_core(self) -> Core:
-        """Return core object."""
+        """Return Core object."""
         return self.coresys.core
+
+    @property
+    def sys_bus(self) -> Bus:
+        """Return Bus object."""
+        return self.coresys.bus
 
     @property
     def sys_plugins(self) -> PluginManager:

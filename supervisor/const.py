@@ -445,3 +445,10 @@ class HostFeature(str, Enum):
     SERVICES = "services"
     SHUTDOWN = "shutdown"
     TIMEDATE = "timedate"
+
+
+class BusEvent(str, Enum):
+    """Bus event type."""
+
+    HARDWARE_NEW_DEVICE = "hardware_new_device"
+    HARDWARE_REMOVE_DEVICE = "hardware_remove_device"
