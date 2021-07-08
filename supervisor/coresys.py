@@ -26,7 +26,7 @@ if TYPE_CHECKING:
     from .hardware.module import HardwareManager
     from .hassos import HassOS
     from .homeassistant.module import HomeAssistant
-    from .host import HostManager
+    from .host.manager import HostManager
     from .ingress import Ingress
     from .jobs import JobManager
     from .misc.scheduler import Scheduler
